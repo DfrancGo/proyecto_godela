@@ -5,6 +5,7 @@
     --tertiary-color: #666666;
     --fourthry-color: #333333;
     --fivethry-color: #E5E5E5;
+    --sixthry-color: #E0E0E0;
     --font-size-sm:12px;
     --font-size-md: clamp(1rem, 2.5vw, 1.25rem);
     --font-size-lg: clamp(1.8rem, 5vw, 3.5rem);
@@ -210,7 +211,7 @@ footer {
     line-height: 1.6em;
 }
 footer > nav > h2 {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
 }
 footer > nav > ul{
     display: flex;
@@ -252,8 +253,41 @@ footer > nav > ul > li > ul > li > a {
     color: var(--tertiary-color);
     text-align: center;
 }
-
-
+/*Aquí empiezan los estilos del formulario*/
+form{
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing);
+    margin-top: var(--spacing);
+}
+form > label {
+    border: var(--sixthry-color) solid 2px;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+}
+form > label > input {
+    border: none;
+    font-weight: bold;
+    width: 100%;
+    color: var(--fourthry-color);
+    text-transform: uppercase;
+    font-size: var(--font-size-md);
+    text-align: left;
+}
+form > label > input:focus {
+    outline: none;
+}
+#consulta {
+    border: var(--sixthry-color) solid 2px;
+    font-weight: bold;
+    font-size: var(--font-size-md);
+    color: var(--fourthry-color);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+}
 @media (max-width: 1400px) {
     footer > nav > ul{
         flex-direction: column;
