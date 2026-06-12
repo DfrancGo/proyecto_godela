@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*Format styles: */
 :root {
     --primary-color: #000000;
     --secondary-color: #ffffff;
@@ -22,11 +24,14 @@
     list-style: none;
     font-family: 'Roboto', sans-serif;
 }
+/*General styles: */
 h1 {
     text-transform: uppercase;
     font-size: var(--font-size-xl);
     font-weight: 600;
     color: var(--fourthry-color);
+    animation: cascadeFall 1.5s ease-in-out;
+    margin-bottom: var(--spacing);
 }
 h2 {
     margin-bottom: var(--spacing);
@@ -62,14 +67,16 @@ a {
     color: var(--secondary-color);
     font-weight: bold;
     letter-spacing: 1px;
-}
-.boton_negro {
-  transition: transform 0.3s ease;
+    animation: slideInLeft 1.5s ease-in-out forwards;
 }
 .boton_negro:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
+    cursor: pointer;
 }
-/*Hasta acá llegan los estilos de etiquetas que se repiten en la pagina y empiezan las barras de navegación*/
+#boton_secundario {
+    margin-bottom: var(--spacing);
+}
+/*Navigation bar styles: */
 
 header {
     position:sticky;
@@ -132,7 +139,8 @@ ul > li > a:hover{
         display: block;
     }
 }
-/*Hasta aquí llegan los estillos de las barras de navegación y empiezan los contenidos principales. No hay distinción del hero al resto de la pagina porque he reciclado estilos para el resto de secciones*/
+/*Main content styles: 
+There's no specific styles for hero cause i'd reused styles for the hero content*/
 .presentacion {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -152,6 +160,10 @@ ul > li > a:hover{
     margin-bottom: var(--spacing);
     gap: var(--spacing);
     overflow: visible;
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+.animate-on-scroll {
+  opacity: 0;
 }
 .slider > li {
     transition: transform 0.3s ease;
@@ -202,7 +214,7 @@ figure > img {
     text-align: center;
     font-weight: bold;
 }
-/*Hasta aquí llegan los estilos del contenido principal y empieza el footer*/
+/*Footer styles: */
 footer {
     margin-top: var(--spacing);
     text-align: center;
@@ -253,13 +265,14 @@ footer > nav > ul > li > ul > li > a {
     color: var(--tertiary-color);
     text-align: center;
 }
-/*Aquí empiezan los estilos del formulario*/
+/*Form styles: */
 form{
     max-width: 70%;
     display: flex;
     flex-direction: column;
     margin-bottom: var(--spacing);
     margin-top: var(--spacing);
+    animation: slideInLeft 2s ease-in-out forwards;
 }
 form > label {
     border: var(--sixthry-color) solid 2px;
@@ -297,4 +310,26 @@ form > label > input:focus {
     footer > nav > ul > li {
         text-align: center;
     }
+}
+/*Animation: */
+@keyframes cascadeFall {
+        0% { transform: translateY(-60px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+@keyframes slideInLeft {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+@keyframes fadeInUp {   
+        from {opacity: 0; transform: translateY(20px);}    
+        to {opacity: 1; transform: translateY(0px);}
+}
+.fade-in-up {
+    animation: fadeInUp 1s ease-in-out forwards;
 }
