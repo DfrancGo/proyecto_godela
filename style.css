@@ -140,7 +140,7 @@ ul > li > a:hover{
     }
 }
 /*Main content styles: 
-There's no specific styles for hero cause i'd reused styles for the hero content*/
+There's no specific styles for hero cause i'd reuse the same  styles for the hero content*/
 .presentacion {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -331,5 +331,5 @@ form > label > input:focus {
         to {opacity: 1; transform: translateY(0px);}
 }
 .fade-in-up {
-    animation: fadeInUp 1s ease-in-out forwards;
+    animation: fadeInUp 2.5s ease-in-out forwards;
 }
