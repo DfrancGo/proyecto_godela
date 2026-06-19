@@ -3,7 +3,7 @@
 /*Format styles: */
 :root {
     --primary-color: #000000;
-    --secondary-color: #ffffff;
+    --secondary-color: #ececec;
     --tertiary-color: #666666;
     --fourthry-color: #333333;
     --fivethry-color: #E5E5E5;
@@ -15,6 +15,7 @@
     --box-shadow:2px 2px 2px black;
     --spacing:5%;
     --spacing-lg:1rem;
+    --spacing-xxl:3rem;
     font-family: 'Roboto', sans-serif;
 }
 *{
@@ -79,22 +80,20 @@ a {
 /*Navigation bar styles: */
 
 header {
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 1rem;
     position:sticky;
-    top: 0;
-    left: 0;
     z-index: 1000;
     background-color: var(--secondary-color);
-}
-nav > ul {
-    align-items: center;
-    width: 100%;
-    display: flex;
-    gap: var(--spacing);
+    border-bottom: var(--fivethry-color) solid 1px;
 }
 ul > li > a:hover{
     color: var(--fourthry-color) ;
 }
-#barra_superior{
+/*#barra_superior{
     color: white;
     display: flex;
     height: 33px;
@@ -102,42 +101,49 @@ ul > li > a:hover{
     background-color: var(--primary-color);
     padding-left: var(--spacing);
     padding-right: var(--spacing);
-}
-#barra_principal{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-    padding-left: var(--spacing);
-    padding-right: var(--spacing);
-    border-bottom: var(--fivethry-color) solid 1px;
-    font-size: var(--font-size-md);
-    text-transform: uppercase;
-}   
+}*/
+
 #barra_principal ul {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
     justify-content: right;
-    height: 100%;
+    font-size: var(--font-size-md);
+    text-transform: uppercase;
+    gap: var(--spacing-xxl) ;
 }
-#menu_mobile {
+#abrir_menu {
     display: none;
 }
 @media (max-width: 900px) {
     #barra_principal {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: var(--fourthry-color);
+
     }
     #barra_principal ul {
-        display: none;
+        flex-direction: column;
+        align-items: end;
+        height: 100%;
     }
-    #menu_mobile {
+    #barra_principal ul li {
+        padding: var(--spacing);
+    }
+    #barra_principal ul li a {
+        color: var(--secondary-color)
+    }
+    #barra_principal ul li a:hover {
+        color: var(--primary-color)
+
+    }
+    /*#menu_mobile {
         display: block;
-    }
+    }*/
 }
 /*Main content styles: 
 There's no specific styles for hero cause i'd reuse the same  styles for the hero content*/
