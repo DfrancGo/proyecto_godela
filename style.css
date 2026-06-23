@@ -146,12 +146,10 @@ ul > li > a:hover{
         left: 0;
         background-color: var(--fourthry-color);
         box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
-        opacity: 0;
-        visibility: none;
+        display: none;
     }
     #barra_principal.visible {
-        opacity: 1;
-        visibility: visible;
+        display: flex;
     }
     #barra_principal ul {
         flex-direction: column;
