@@ -9,23 +9,25 @@
     <link rel="shortcut icon" href="../assets/logos/logo_pestaña.png" type="image/png">
     <link rel="stylesheet" href="../style.css ">
     <title>Manufacturas GODELA - Calidad y exclusividad</title>
+    <script src="../main.js" defer></script>
 </head>
 <body>
     <header>
-        <!--<nav id="barra_superior">
+        <!-- (pendiente de confirmacion para eliminar)<nav id="barra_superior">
             <ul>
                 <li>965 49 45 40</li>
                 <li>info@godela.es</li>
             </ul>
-        </nav>-->
-        <nav id="barra_principal">
-            <a href="../index.html"><img src="../assets/logos/logo_barra_nav.png" alt="Logo de manufacturas Godela"></a>
+        </nav> -->
+        <a href="./index.html"><img src="../assets/logos/logo_barra_nav.png" alt="Logo de manufacturas Godela"></a>
+        <button id="abrir_menu"><img src="../assets/logos/burger_menu.svg" alt="menú de navegación"></button>
+        <nav id="barra_principal" > 
             <ul>
                 <li>
                     <a href="../index.html">Inicio</a>
                 </li>
                 <li>
-                    <a href="./sobre_nosotros.html" style="text-decoration: underline 1px #666666 solid;">Sobre nosotros</a>
+                    <a href="./sobre_nosotros.html">Sobre nosotros</a>
                 </li>
                 <li>
                     <a href="./catalogo.html">Catálogo</a>
@@ -33,8 +35,16 @@
                 <li>
                     <a href="./contacto.html">Contacto</a>
                 </li>
+                <li id="sesion_escritorio">
+                    <a href="../index.html"> <img src="../assets/logos/sesion_escritorio.svg" alt="iniciar sesion"></a>
+                </li>
+                <li id="sesion_movil">
+                    <a href="index.html"> <img src="../assets/logos/sesion_movil.svg" alt="iniciar sesion"></a>
+                </li>
             </ul>
-            <a id="menu_mobile"><img src="../assets/logos/burger_menu.svg" alt="menú de navegación"></a>
+            <button id="cerrar_menu">
+                <img src="../assets/logos/cerrar.svg" alt="cerrar menu de navegación">
+            </button>
         </nav>
     </header>
     <main>

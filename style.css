@@ -310,7 +310,6 @@ form > label > input {
     font-weight: bold;
     width: 100%;
     color: var(--fourthry-color);
-    text-transform: uppercase;
     font-size: var(--font-size-md);
     text-align: left;
 }
@@ -324,7 +323,6 @@ form > label > input:focus {
     color: var(--fourthry-color);
     margin-bottom: var(--spacing-lg);
     padding: var(--spacing-lg);
-    text-transform: uppercase;
     font-family: 'Roboto', sans-serif;
 }
 @media (max-width: 1400px) {
