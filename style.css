@@ -90,6 +90,9 @@ header {
     background-color: var(--secondary-color);
     border-bottom: var(--fivethry-color) solid 1px;
 }
+#sesion_movil{
+    display:none;
+}
 ul > li > a:hover{
     color: var(--fourthry-color) ;
 }
@@ -115,21 +118,45 @@ ul > li > a:hover{
     text-transform: uppercase;
     gap: var(--spacing-xxl) ;
 }
-#abrir_menu {
+#abrir_menu, #cerrar_menu{
     display: none;
 }
 @media (max-width: 900px) {
-    #barra_principal {
-        position: absolute;
-        top: 0;
-        right: 0;
+    #sesion_escritorio {
+        display:none;
+    }
+    #sesion_movil {
+        display: block;
+    }
+    #abrir_menu, #cerrar_menu{
+        display:block;
+        cursor: pointer;
+    }
+    #cerrar_menu{
         background-color: var(--fourthry-color);
-
+        border: none;
+        padding: var(--spacing);
+    }
+    #barra_principal {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background-color: var(--fourthry-color);
+        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+        opacity: 0;
+        visibility: none;
+    }
+    #barra_principal.visible {
+        opacity: 1;
+        visibility: visible;
     }
     #barra_principal ul {
         flex-direction: column;
-        align-items: end;
-        height: 100%;
+        justify-content: center;
+        align-items: center;
     }
     #barra_principal ul li {
         padding: var(--spacing);
@@ -137,14 +164,7 @@ ul > li > a:hover{
     #barra_principal ul li a {
         color: var(--secondary-color)
     }
-    #barra_principal ul li a:hover {
-        color: var(--primary-color)
-
     }
-    /*#menu_mobile {
-        display: block;
-    }*/
-}
 /*Main content styles: 
 There's no specific styles for hero cause i'd reuse the same  styles for the hero content*/
 .presentacion {

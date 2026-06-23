@@ -13,3 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 });
+const nav=document.querySelector("#barra_principal");
+const abrir = document.querySelector("#abrir_menu");
+const cerrar = document.querySelector("#cerrar_menu");
+
+abrir.addEventListener("click", () => {
+    nav.classList.add("visible");
+})
+
+cerrar.addEventListener("click", () => {
+    nav.classList.remove("visible");
+})
