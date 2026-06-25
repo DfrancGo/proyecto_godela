@@ -85,8 +85,9 @@ header {
     justify-content: space-around;
     width: 100%;
     padding: 1rem;
-    position:fixed;
+    top: 0;
     z-index: 1000;
+    position:sticky;
     background-color: var(--secondary-color);
     border-bottom: var(--fivethry-color) solid 1px;
 }
@@ -122,6 +123,7 @@ ul > li > a:hover{
     display: none;
 }
 @media (max-width: 900px) {
+
     #sesion_escritorio {
         display:none;
     }
