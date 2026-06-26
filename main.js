@@ -134,10 +134,37 @@ function initSlider(ulEl) {
                 update(false);
             }, 420);
         }
+        // Any actual slide change (user interaction or autoplay tick) resets the autoplay timer.
+        startAutoplay();
     }
+
+    let autoplayTimer = null;
+    const AUTOPLAY_MS = 4000;
+    function startAutoplay() {
+        stopAutoplay();
+        if (document.hidden) return;
+        autoplayTimer = setTimeout(() => {
+            goTo(realIndex + 1, true);
+        }, AUTOPLAY_MS);
+    }
+    function stopAutoplay() {
+        if (autoplayTimer !== null) {
+            clearTimeout(autoplayTimer);
+            autoplayTimer = null;
+        }
+    }
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+    });
 
     prevBtn.addEventListener('click', () => goTo(realIndex - 1, true));
     nextBtn.addEventListener('click', () => goTo(realIndex + 1, true));
+
+    // Prevent the viewport's pointerdown drag handler from hijacking arrow clicks.
+    [prevBtn, nextBtn].forEach(btn => {
+        btn.addEventListener('pointerdown', (e) => e.stopPropagation());
+    });
 
     let dragStartX = 0;
     let dragStartTranslate = 0;
@@ -150,6 +177,7 @@ function initSlider(ulEl) {
     }
 
     viewport.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('.slider-arrow')) return;
         if (e.button !== 0 && e.pointerType === 'mouse') return;
         isDragging = true;
         didMove = false;
@@ -202,9 +230,6 @@ function initSlider(ulEl) {
         }, 100);
     });
 
-    setInterval(() => {
-        goTo(realIndex + 1, true);
-    }, 4000);
-
     update(false);
+    startAutoplay();
 }
