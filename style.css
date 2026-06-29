@@ -219,6 +219,9 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
     color: var(--tertiary-color);
     padding-bottom: 0;
 }
+.presentacion > div{
+    align-self: center;
+}
 .slider-wrapper {
     position: relative;
     margin-top: var(--spacing);
@@ -486,7 +489,11 @@ form > label > input:focus {
 .login-disclaimer a:hover {
     color: var(--fourthry-color);
 }
-
+@media (max-width: 650px) {
+    .presentacion {
+        grid-template-columns: 1fr;
+    }
+}
 @media (max-width: 1400px) {
     footer > nav > ul{
         flex-direction: column;
@@ -495,11 +502,6 @@ form > label > input:focus {
     }
     footer > nav > ul > li {
         text-align: center;
-    }
-}
-@media  (max-width: 1594px) {
-    .presentacion {
-        padding-bottom: var(--spacing);
     }
 }
 /*Animation: */
