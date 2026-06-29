@@ -14,18 +14,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.querySelectorAll('.slider').forEach(initSlider);
+
+    const nav = document.querySelector("#barra_principal");
+    const abrir = document.querySelector("#abrir_menu");
+    const cerrar = document.querySelector("#cerrar_menu");
+
+    if (nav && abrir) {
+        abrir.addEventListener("click", () => {
+            nav.classList.add("visible");
+        });
+
+        if (cerrar) {
+            cerrar.addEventListener("click", () => {
+                nav.classList.remove("visible");
+            });
+        }
+
+        document.addEventListener("click", (e) => {
+            if (!nav.classList.contains("visible")) return;
+            if (nav.contains(e.target) || abrir.contains(e.target)) return;
+            nav.classList.remove("visible");
+        });
+    }
 });
-const nav=document.querySelector("#barra_principal");
-const abrir = document.querySelector("#abrir_menu");
-const cerrar = document.querySelector("#cerrar_menu");
-
-abrir.addEventListener("click", () => {
-    nav.classList.add("visible");
-})
-
-cerrar.addEventListener("click", () => {
-    nav.classList.remove("visible");
-})
 
 function initSlider(ulEl) {
     const originalItems = Array.from(ulEl.children);
@@ -57,8 +68,21 @@ function initSlider(ulEl) {
     allItems.forEach((item, idx) => {
         item.setAttribute('role', 'group');
         item.setAttribute('aria-roledescription', 'slide');
-        const realIdx = idx === 0 ? n : (idx === n + 1 ? 1 : idx);
-        item.setAttribute('aria-label', `Imagen ${realIdx} de ${n}`);
+        // Map cloned DOM positions back to real 1-based slide numbers.
+        // DOM order after wrap-clone: [lastClone, s1, s2, …, sN, firstClone]
+        // - idx 0      -> last clone  -> real index n
+        // - idx 1..n   -> real slides -> real index 1..n
+        // - idx n+1    -> first clone -> real index 1
+        let realIdx;
+        if (idx === 0) realIdx = n;
+        else if (idx === n + 1) realIdx = 1;
+        else realIdx = idx;
+        // Guard against single-slide edge case where n === 1:
+        // both clones are the same node, so the only real item is at idx 1,
+        // and idx 0 / idx 2 are out of range. Skip aria-label for the duplicates.
+        if (realIdx >= 1 && realIdx <= n) {
+            item.setAttribute('aria-label', `Imagen ${realIdx} de ${n}`);
+        }
     });
 
     const prevBtn = document.createElement('button');
@@ -201,66 +225,6 @@ function initSlider(ulEl) {
 
     prevBtn.addEventListener('click', () => goTo(realIndex - 1, true));
     nextBtn.addEventListener('click', () => goTo(realIndex + 1, true));
-
-    // Prevent the viewport's pointerdown drag handler from hijacking arrow clicks.
-    [prevBtn, nextBtn].forEach(btn => {
-        btn.addEventListener('pointerdown', (e) => e.stopPropagation());
-    });
-
-    let dragStartX = 0;
-    let dragStartTranslate = 0;
-    let isDragging = false;
-    let didMove = false;
-
-    function getTranslateX() {
-        const m = new DOMMatrixReadOnly(getComputedStyle(ulEl).transform);
-        return m.m41;
-    }
-
-    viewport.addEventListener('pointerdown', (e) => {
-        if (e.target.closest('.slider-arrow')) return;
-        if (e.button !== 0 && e.pointerType === 'mouse') return;
-        isDragging = true;
-        didMove = false;
-        dragStartX = e.clientX;
-        dragStartTranslate = getTranslateX();
-        viewport.classList.add('is-dragging');
-        ulEl.classList.add('is-dragging');
-        viewport.setPointerCapture(e.pointerId);
-    });
-
-    viewport.addEventListener('pointermove', (e) => {
-        if (!isDragging) return;
-        const delta = e.clientX - dragStartX;
-        if (Math.abs(delta) > 3) didMove = true;
-        ulEl.style.transition = 'none';
-        ulEl.style.transform = `translateX(${dragStartTranslate + delta}px)`;
-    });
-
-    function endDrag(e) {
-        if (!isDragging) return;
-        isDragging = false;
-        viewport.classList.remove('is-dragging');
-        ulEl.classList.remove('is-dragging');
-        const delta = e.clientX - dragStartX;
-        if (Math.abs(delta) > 50) {
-            goTo(delta < 0 ? realIndex + 1 : realIndex - 1, true);
-        } else {
-            update(true);
-        }
-        try { viewport.releasePointerCapture(e.pointerId); } catch (_) {}
-    }
-
-    viewport.addEventListener('pointerup', endDrag);
-    viewport.addEventListener('pointercancel', endDrag);
-
-    viewport.addEventListener('click', (e) => {
-        if (didMove) {
-            e.preventDefault();
-            e.stopPropagation();
-            didMove = false;
-        }
-    }, true);
 
     let resizeTimer = null;
     window.addEventListener('resize', () => {

@@ -68,7 +68,8 @@ a {
     color: var(--secondary-color);
     font-weight: bold;
     letter-spacing: 1px;
-    animation: slideInLeft 1.5s ease-in-out forwards;
+    animation: cascadeFall 1.5s ease-in-out;
+    transition: transform 0.5s ease;
 }
 .boton_negro:hover {
     transform: scale(1.05);
@@ -113,8 +114,9 @@ ul > li > a:hover{
 #abrir_menu, #cerrar_menu{
     display: none;
 }
-@media (max-width: 900px) {
-
+/*Media query for mobile and tablet*/
+@media (max-width: 1100px) {
+    /*Header responsive styles*/
     #sesion_escritorio {
         display:none;
     }
@@ -124,19 +126,19 @@ ul > li > a:hover{
     #abrir_menu, #cerrar_menu{
         display:block;
         cursor: pointer;
+        border: none;
     }
     #cerrar_menu{
         background-color: var(--fourthry-color);
-        border: none;
         padding: var(--spacing);
         justify-self: center;
+        padding-top: var(--spacing);
     }
     #barra_principal {
         flex-direction: column;
         position: absolute;
         top: 100%;
         right: 0;
-        left: 0;
         background-color: var(--fourthry-color);
         box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
         opacity: 0;
@@ -148,6 +150,7 @@ ul > li > a:hover{
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
+        width: 50%;
     }
     #barra_principal ul {
         flex-direction: column;
@@ -160,6 +163,48 @@ ul > li > a:hover{
     #barra_principal ul li a {
         color: var(--secondary-color)
     }
+
+    /*Main responsive styles: */
+    .presentacion  {
+        grid-template-columns: 1fr;
+        height: auto;
+        margin-bottom: 8rem;
+    }
+    .slider-wrapper {
+        margin-bottom: var(--spacing-lg);
+    }
+    .slider-viewport {
+        max-width: 100%;
+    }
+    .slider > li > figure > img {
+        max-height: 70vh;
+    }
+    .slider-arrow {
+        width: 36px;
+        height: 36px;
+    }
+    .slider-arrow--prev {
+        left: 0.5rem;
+    }
+    .slider-arrow--next {
+        right: 0.5rem;
+    }
+    #info_galeria_2 {
+        flex-wrap: wrap;
+    }
+    #info_galeria_2 > div > h2, #info_galeria_2 > div > p {
+        color: var(--secondary-color);
+        text-align: center;
+    }
+    /*Login responsive styles: */
+    .login-wrapper {
+        padding-left: var(--spacing);
+        padding-right: var(--spacing);
+    }
+    .login-form {
+        max-width: 100%;
+    }
+
     }
 /*Main content styles: 
 There's no specific styles for hero cause i'd reuse the same  styles for the hero content*/
@@ -185,10 +230,6 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
     overflow: hidden;
     max-width: 600px;
     margin: 0 auto;
-    cursor: grab;
-}
-.slider-viewport.is-dragging {
-    cursor: grabbing;
 }
 .slider {
     display: flex;
@@ -197,9 +238,6 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
     margin: 0;
     transition: transform 1s ease;
     will-change: transform;
-}
-.slider.is-dragging {
-    transition: none;
 }
 .slider > li {
     flex: 0 0 100%;
@@ -292,40 +330,6 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
 #galeria_2 .slider-dot:focus-visible {
     outline-color: var(--secondary-color);
 }
-
-@media (max-width: 768px) {
-    .presentacion  {
-        grid-template-columns: 1fr;
-        height: auto;
-        margin-bottom: 8rem;
-    }
-    .slider-wrapper {
-        margin-bottom: var(--spacing-lg);
-    }
-    .slider-viewport {
-        max-width: 100%;
-    }
-    .slider > li > figure > img {
-        max-height: 70vh;
-    }
-    .slider-arrow {
-        width: 36px;
-        height: 36px;
-    }
-    .slider-arrow--prev {
-        left: 0.5rem;
-    }
-    .slider-arrow--next {
-        right: 0.5rem;
-    }
-    #info_galeria_2 {
-        flex-wrap: wrap;
-    }
-    #info_galeria_2 > div > h2, #info_galeria_2 > div > p {
-        color: var(--secondary-color);
-        text-align: center;
-    }
-}
 figure > img {
     width: 100%;
     height: 100%;
@@ -354,11 +358,12 @@ figure > img {
 }
 /*Footer styles: */
 footer {
-    margin-top: var(--spacing);
+    padding-top: var(--spacing-xxl);
     text-align: center;
     padding: var(--spacing);
     font-size: var(--font-size-md);
     line-height: 1.6em;
+    background-color: var(--secondary-color);
 }
 footer > nav > h2 {
     font-size: var(--font-size-lg);
@@ -410,7 +415,7 @@ form{
     flex-direction: column;
     margin-bottom: var(--spacing);
     margin-top: var(--spacing);
-    animation: slideInLeft 2s ease-in-out forwards;
+    animation: cascadeFall 1.5s ease-in-out;
 }
 form > label {
     border: var(--sixthry-color) solid 2px;
@@ -437,6 +442,51 @@ form > label > input:focus {
     padding: var(--spacing-lg);
     font-family: 'Roboto', sans-serif;
 }
+
+/*Login (portal_empleados) styles: */
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+    margin-bottom: var(--spacing-xxl);
+}
+.login-wrapper > h1 {
+    margin-bottom: var(--spacing-xxl);
+}
+.login-form {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: var(--secondary-color);
+}
+.login-form > form {
+    width: 100%;
+    max-width: 100%;
+    animation: cascadeFall 1.5s ease-in-out;
+}
+.box-login {
+    background-color: white;
+}
+.login-disclaimer {
+    margin-top: var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    color: var(--tertiary-color);
+}
+.login-disclaimer a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+.login-disclaimer a:hover {
+    color: var(--fourthry-color);
+}
+
 @media (max-width: 1400px) {
     footer > nav > ul{
         flex-direction: column;

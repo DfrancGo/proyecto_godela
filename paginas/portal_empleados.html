@@ -42,10 +42,30 @@
         </nav>
     </header>
     <main>
-        <section>
-            <h1>Nuestro catálogo</h1>
-            <div class="presentacion">
-                <p>Sí falta el catálogo :c</p>
+        <section class="login-wrapper">
+            <h1>Portal de empleados</h1>
+            <div class="login-form">
+                <form action="#null" method="POST" autocomplete="on">
+                    <label for="usuario" class="box-login">
+                        <input type="text" id="usuario"
+                                placeholder="Usuario"
+                                name="usuario"
+                                autocomplete="username" required />
+                    </label>
+                    <label for="password" class="box-login">
+                        <input type="password" id="password"
+                                placeholder="Contraseña"
+                                name="password"
+                                autocomplete="current-password"
+                                minlength="8" required />
+                    </label>
+                    <input type="submit" value="Iniciar sesión" class="boton_negro" />
+                </form>
+                <p class="login-disclaimer">
+                    Acceso restringido al personal de Manufacturas GODELA.
+                    <br>
+                    <a href="../index.html">Volver al inicio</a>
+                </p>
             </div>
         </section>
     </main>
@@ -85,6 +105,6 @@
                 <figcaption>2025 Manufacturas GODELA. Todos los derechos reservados.</figcaption>
             </figure>
         </div>
-    </footer>                    
+    </footer>
 </body>
 </html>
