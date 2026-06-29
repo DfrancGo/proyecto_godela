@@ -111,6 +111,32 @@ function initSlider(ulEl) {
         if (slideWidth !== prev) update(false);
     });
 
+    // Wrap-snap state. When the carousel is mid-animation to a cloned slide
+    // (i.e. a wrap-around step), we want to teleport back to the real slide
+    // *after* the visible animation finishes. Driven by `transitionend`, with
+    // a 550ms safety-net timeout in case `transitionend` doesn't fire.
+    let pendingSnap = null;     // function to run once the wrap animation ends
+    let snapFallbackTimer = null;
+
+    function clearPendingSnap() {
+        pendingSnap = null;
+        if (snapFallbackTimer !== null) {
+            clearTimeout(snapFallbackTimer);
+            snapFallbackTimer = null;
+        }
+    }
+
+    function onTransitionEnd(e) {
+        // Only react to the transform on the track itself, not bubbling children.
+        if (e.target !== ulEl || e.propertyName !== 'transform') return;
+        if (pendingSnap) {
+            const snap = pendingSnap;
+            clearPendingSnap();
+            snap();
+        }
+    }
+    ulEl.addEventListener('transitionend', onTransitionEnd);
+
     function update(animate) {
         ulEl.style.transition = animate ? '' : 'none';
         ulEl.style.transform = `translateX(${-trackIndex * slideWidth}px)`;
@@ -123,16 +149,31 @@ function initSlider(ulEl) {
     }
 
     function goTo(target, animate) {
+        // Cancel any in-flight wrap-snap so a rapid second click doesn't race
+        // with a previously queued snap.
+        clearPendingSnap();
+
         const wrapped = target < 0 || target >= n;
         realIndex = ((target % n) + n) % n;
         trackIndex = realIndex + 1;
         update(animate !== false);
         if (wrapped) {
-            setTimeout(() => {
+            pendingSnap = () => {
                 if (target < 0) trackIndex = n;
                 else trackIndex = 1;
                 update(false);
-            }, 420);
+            };
+            // Safety net in case `transitionend` never fires (e.g. the animation
+            // was cancelled mid-flight by another click). 550ms > the CSS 500ms
+            // transition so it only kicks in if the event-based path fails.
+            snapFallbackTimer = setTimeout(() => {
+                snapFallbackTimer = null;
+                if (pendingSnap) {
+                    const snap = pendingSnap;
+                    clearPendingSnap();
+                    snap();
+                }
+            }, 550);
         }
         // Any actual slide change (user interaction or autoplay tick) resets the autoplay timer.
         startAutoplay();

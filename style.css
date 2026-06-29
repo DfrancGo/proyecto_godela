@@ -195,7 +195,7 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
     list-style: none;
     padding: 0;
     margin: 0;
-    transition: transform 0.5s ease;
+    transition: transform 1s ease;
     will-change: transform;
 }
 .slider.is-dragging {
@@ -238,7 +238,7 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
     align-items: center;
     justify-content: center;
     padding: 0;
-    transition: background 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
+    transition: background 1s ease, transform 1s ease, opacity 1s ease;
 }
 .slider-arrow:hover {
     background: rgba(0, 0, 0, 0.85);
@@ -273,7 +273,7 @@ There's no specific styles for hero cause i'd reuse the same  styles for the her
     background: transparent;
     cursor: pointer;
     padding: 0;
-    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 1s ease, border-color 1s ease, transform 1s ease;
 }
 .slider-dot.is-active {
     background: var(--primary-color);
