@@ -131,7 +131,7 @@ ul > li > a:hover{
     #cerrar_menu{
         background-color: var(--fourthry-color);
         padding: var(--spacing);
-        justify-self: center;
+        margin: auto;
         padding-top: var(--spacing);
     }
     #barra_principal {
