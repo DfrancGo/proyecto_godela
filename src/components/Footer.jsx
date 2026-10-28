@@ -24,7 +24,9 @@ export default function Footer() {
               <li><Link to="/sobre-nosotros">Sobre nosotros</Link></li>
               <li><Link to="/catalogo">Catálogo</Link></li>
               <li><Link to="/contacto">Contacto</Link></li>
+              {/* Oculto temporalmente: portal de empleados no operativo.
               <li><Link to="/portal-empleados">Portal empleados</Link></li>
+              */}
             </ul>
           </nav>
 

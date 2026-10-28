@@ -69,10 +69,12 @@ export default function Header() {
           </ul>
 
           <div className="header__nav-extra">
+            {/* Oculto temporalmente: portal de empleados no operativo.
             <NavLink className="header__session" to="/portal-empleados">
               <User />
               <span>Portal empleados</span>
             </NavLink>
+            */}
             <Link className="btn btn--primary" to="/contacto">
               Contactar
             </Link>
@@ -80,6 +82,7 @@ export default function Header() {
         </nav>
 
         <div className="header__actions">
+          {/* Oculto temporalmente: portal de empleados no operativo.
           <NavLink
             className="header__icon-btn"
             to="/portal-empleados"
@@ -87,6 +90,7 @@ export default function Header() {
           >
             <User />
           </NavLink>
+          */}
           <Link className="btn btn--primary header__cta" to="/contacto">
             Contactar
           </Link>

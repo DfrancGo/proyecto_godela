@@ -4,7 +4,8 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Catalog from './pages/Catalog.jsx'
 import Contact from './pages/Contact.jsx'
-import EmployeePortal from './pages/EmployeePortal.jsx'
+// Oculto temporalmente: portal de empleados no operativo.
+// import EmployeePortal from './pages/EmployeePortal.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
@@ -15,7 +16,9 @@ export default function App() {
         <Route path="sobre-nosotros" element={<About />} />
         <Route path="catalogo" element={<Catalog />} />
         <Route path="contacto" element={<Contact />} />
+        {/* Oculto temporalmente: portal de empleados no operativo.
         <Route path="portal-empleados" element={<EmployeePortal />} />
+        */}
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
